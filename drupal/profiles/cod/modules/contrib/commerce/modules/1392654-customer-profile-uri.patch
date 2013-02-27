@@ -1,0 +1,13 @@
+diff --git a/modules/customer/commerce_customer.module b/modules/customer/commerce_customer.module
+index 051d7c6..e272999 100644
+--- a/modules/customer/commerce_customer.module
++++ b/modules/customer/commerce_customer.module
+@@ -41,7 +41,7 @@ function commerce_customer_entity_info() {
+           'custom settings' => FALSE,
+         ),
+       ),
+-      'uri callback' => 'commerce_customer_profile_uri',
++      'uri callback' => module_implements('commerce_customer_profile_uri') ? 'commerce_customer_profile_uri' : NULL,
+       'token type' => 'commerce-customer-profile',
+       'metadata controller class' => '',
+       'access callback' => 'commerce_entity_access',
