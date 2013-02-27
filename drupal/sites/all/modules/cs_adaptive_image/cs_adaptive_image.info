@@ -1,0 +1,12 @@
+name = Client-side adaptive image
+description = Provides an image field formatter that allows you to select appropriate image styles for various client widths.
+package = Media
+core = 7.x
+dependencies[] = image
+
+; Information added by drupal.org packaging script on 2012-01-31
+version = "7.x-1.0-alpha2"
+core = "7.x"
+project = "cs_adaptive_image"
+datestamp = "1327972549"
+
