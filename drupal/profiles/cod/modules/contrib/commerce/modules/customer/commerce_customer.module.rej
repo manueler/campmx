@@ -1,0 +1,17 @@
+***************
+*** 41,47 ****
+            'custom settings' => FALSE,
+          ),
+        ),
+-       'uri callback' => 'commerce_customer_profile_uri',
+        'token type' => 'commerce-customer-profile',
+        'metadata controller class' => '',
+        'access callback' => 'commerce_entity_access',
+--- 41,47 ----
+            'custom settings' => FALSE,
+          ),
+        ),
++       'uri callback' => module_implements('commerce_customer_profile_uri') ? 'commerce_customer_profile_uri' : NULL,
+        'token type' => 'commerce-customer-profile',
+        'metadata controller class' => '',
+        'access callback' => 'commerce_entity_access',

@@ -1,0 +1,11 @@
+<?php
+/**
+ * Install file for the Client-side adaptive image module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function cs_adaptive_image_uninstall() {
+  variable_del('cs_adaptive_image_breakpoint_count');
+}

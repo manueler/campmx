@@ -1,0 +1,435 @@
+@import "compass/reset";
+@import "compass/layout";
+@import "compass/support";
+@import "compass/css3";
+@import "compass/typography";
+@import "compass/utilities";
+
+
+@include font-face("rokkit", font-files("rokkitt-webfont.ttf"),"rokkitt-webfont.eot");
+@include font-face("lucida", font-files("lsans-webfont.ttf"),"lsans-webfont.eot");
+
+$color-default:#32415A;
+$font-sans: Helvetica, "lucida", sans-serif;
+$font-body: $font-sans;
+$base-font-size:13px;
+$base-line-heigth:24px;
+$browser-default-font-size: 16px;
+$title-font-size: (h1 36px) (h2 24px) (h3 21px) (h4 18px) (h5 16px);
+
+@mixin establish-baseline($font-size: $base-font-size, $font-family: $font-body) {
+  $taille: 100% * $font-size / $browser-default-font-size;
+  $line-height: rhythm(1, $font-size);
+  html {
+    font: #{$taille}/#{$line-height} $font-family;
+  }
+}
+@mixin margin($taille:$base-font-size, $type:margin, $mt:1, $mb:1 ) {
+  @if ($mt == $mb) {
+    @if ($mt == 0) {
+      #{$type}: 0;
+    } @else {
+      #{$type}: rhythm($mt, $taille) 0;
+    }
+  } @else {
+    #{$type}: rhythm($mt, $taille) 0 rhythm($mb, $taille);
+  }
+}
+
+@include establish-baseline; // html
+@each $typo-array in $title-font-size {
+  $balise: nth($typo-array, 1);
+  $taille: nth($typo-array, 2);
+  #{$balise}, .#{$balise} {
+    @include adjust-font-size-to($taille);
+    @include margin($taille);
+  }
+}
+h1,h2,h3,h4,h5{
+  font-family:"rokkit";
+  color:$color-default;
+}
+a{
+  @include hover-link;
+  color:$color-default;
+}
+body{
+  background:url(../images/bg-body.png) center top repeat;
+}
+#zone-footer-wrapper{
+ background:url(../images/bg-footer.png) center bottom repeat-x; 
+}
+.logo-img{
+  position:absolute;
+  width:255px;
+  height:255px;
+  background:white;
+  top:-70px;
+  @include border-radius(128px);
+  @include box-shadow(rgba(black,0.5) 5px 5px 12px);
+  text-align:center;
+  line-height:255px;
+  z-index:5;
+  a{
+    width: 255px;
+    height: 255px;
+    position: absolute;
+    left: 0px;
+    z-index:1;
+  }
+  img{
+    vertical-align:middle;
+  }
+}
+#zone-user-wrapper{
+  @include background-image(linear-gradient(#0eaee8, #098cc9));
+  min-height:80px;
+}
+#zone-menu-wrapper{
+  background:#0fb1ea;
+  min-height:90px;
+}
+#block-nice-menus-1{
+  @include float-right;
+  .content{
+    ul li{
+      background:none;
+      border:none;
+      padding:21px 5px;
+      @include transition-property(background);
+      @include transition-duration(0.5s);
+      &:hover{
+        background:#f7931e;
+      }
+      a{
+        color:white;
+        font-family:"rokkit";
+        font-size: 30px;
+        font-weight: bold;
+        text-decoration:none;
+      }
+    }
+  }
+}
+/***********************************************************block sponsor platino***********************************/
+.block-views-sponsors-block-1{
+  text-align:center;
+  background:url('../images/bg-block.png') repeat;
+  margin:10px 0px;
+  .view{
+    .view-content{
+      .item{
+        @include inline-block;
+        margin:0px 15px;
+      }
+    }
+  }
+}
+/****************************************************slider***********************************/
+.block-views-slider-block{
+  height:500px;
+  background:url('../images/bg-block.png') repeat;
+  @include border-radius(20px);
+  @include box-shadow(rgba(black,0.5) 0px 15px 20px -8px);
+  position:relative;
+  .view{
+    .view-content{
+      width:920px;
+      margin:0px auto;
+      .item{
+        .info{
+          @include float-left;
+          width:450px;
+        }
+        .title{
+          font-family:"rokkit";
+          color:#098cc9;
+          font-size:40px;
+          font-weight:bold;
+          margin:130px 0px 50px -35px;
+        }
+        .caption{
+          font-family:"lucida";
+          color:#808080;
+          font-size:20px;
+          margin:0px 30px 0px 0px;
+        }
+        .image{
+          width:450px;
+          height:450px;
+          position:absolute;
+          text-align:center;
+          line-height:450px;
+          img{
+            vertical-align:middle;
+          }
+          @include float-right;
+        }
+      }
+      #widget_pager_bottom_slider-block{
+        position:absolute;
+        bottom:40px;
+        margin:0px 100px;
+        .views-slideshow-pager-field-item{
+          @include inline-block;
+          margin:0px 5px;
+          width:26px;
+          height:26px;
+          background:url('../images/pager_slide.png') no-repeat;
+          &.active{
+            background:url('../images/pager_slide_active.png') no-repeat;
+          }
+        }
+      }
+      #views_slideshow_controls_text_slider-block{
+        #views_slideshow_controls_text_previous_slider-block{
+          background:url('../images/slider_prev.png') no-repeat;
+          width:53px;
+          height:61px;
+          position:absolute;
+          left:40px;
+          top:250px;
+          @include transition-property(background);
+          @include transition-duration(0.5s);
+          @include hide-text;
+          &:hover{
+            background:url('../images/slider_prev_active.png') no-repeat;
+          }
+        }
+        #views_slideshow_controls_text_pause_slider-block{
+          display:none;
+        }
+        #views_slideshow_controls_text_next_slider-block{
+          background:url('../images/slider_next.png') no-repeat;
+          width:53px;
+          height:61px;
+          position:absolute;
+          right:40px;
+          top:250px;
+          @include transition-property(background);
+          @include transition-duration(0.5s);
+          @include hide-text;
+          &:hover{
+            background:url('../images/slider_next_active.png') no-repeat;
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+* Bloque Ultimas noticias
+**/
+.container-12 .grid-8 { width: 740px; }
+.container-12 .grid-4 { width: 415px; }
+#block-block-2{
+  div.block-inner{ position: relative; }
+  h2.block-title{
+    position: absolute;
+    background: url(../images/block-liston.png) no-repeat;
+    width: 100%;
+    height: 77px;
+    background-size: 100%;
+    font-family:"rokkit";
+    color: #FFF;
+    font-weight: bold;
+    font-size: 2.7em;
+    text-align: center;
+    z-index: 1;
+  }
+  div.content{
+    border: 1px solid #ccc;
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 40px;
+    background: #FFF;
+    border-radius: 10px;
+    margin-top: 28px;
+    margin-left: 14px;
+    position: absolute;
+    @include box-shadow(rgba(#939DA4,1) 2px 3px 10px);
+  }
+  h4{
+    font-family:"rokkit";
+    font-size: 2.5em;
+    margin: 5px 0px 0px 0px;
+    text-align: center;
+    color: #19A0E4;
+    font-weight: bold;
+  }
+  p{
+    text-align: center;
+    font-size: 1em;
+    font-family:"rokkit";
+    color: #6C6C7A;
+  }
+  #oth{
+    h2{ text-align: center; }
+  }
+}
+#zone-content{
+  margin-top: 20px;
+}
+#block-views-frontpage-block-1{
+   border-radius: 10px;
+   background: rgba(255, 255, 255, 0.5);
+   padding: 20px 40px;
+   @include box-shadow(rgba(#939DA4,1) 2px 3px 10px);
+   .block-inner{
+    position: relative;
+   }
+   h2.block-title{
+      font-size: 2em;
+      font-weight: bold;
+   }
+   .views-field-title{
+      margin: 0px;
+   }
+   .views-field-body{
+      font-family:verdana;
+      color:#136;
+      text-align:justify;
+      font-size: 1.4em;
+      margin-bottom: 25px;
+   }
+  .views-field-body .field-content{
+      color: rgb(92, 92, 92);
+  }
+  .views-field-title a{
+    font-family:"rokkit";
+    font-size: 1.2em;
+    color: #18A1E4;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .views-field-view-node span{
+    float: right;
+  }
+  .views-field-view-node a {
+    font-family: "rokkit";
+    display: block;
+    border: 4px solid #18a1e4;
+    padding: 5px;
+    border-radius: 30px;
+    width: 100px;
+    font-size: 1.7em;
+    text-decoration: none;
+    text-align: center;
+    color: #18a1e4;
+    font-weight: bold;
+  }
+  .views-field-comment-count{
+    float: left;
+  }
+  .views-field-comment-count .field-content{
+    color: #18a1e4;
+    font-family: "rokkit";
+    font-size: 2em;
+    line-height: 60px;
+    padding: 0px 0px 0px 15px;
+  }
+  .views-field-comment-count span em{
+      color: #18a1e4;
+      font-family: "rokkit";
+      font-size: 1.3em !important;
+      border: 8px double #18a1e4;
+      border-radius: 30px;
+      padding: 10px;
+      display: block;
+      width: 55px;
+      height: 55px;
+      box-sizing: border-box;
+      text-align: center;
+      float: left;
+      line-height: 23px;
+  }
+  .views-row {
+    overflow: hidden;
+  }
+}
+#block-system-user-menu{
+  position: relative;
+  .block-inner{
+    position: absolute;
+    right:0px;
+    margin-top: 22px;
+  }
+  .block-inner ul li{
+    list-style: none;
+    float: left;
+    margin-left: 40px;
+  }
+  .block-inner ul li a{
+    color: white;
+    font-family: "rokkit";
+    font-size: 2em;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
+
+#block-views-sponsors-block-2{
+  clear: both;
+  margin-top: 30px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  padding: 30px;
+  @include box-shadow(rgba(#939DA4,1) 2px 3px 10px);
+  .view-display-id-block_2{
+    .views-row{
+      margin-right: 30px;
+      float: left;
+    }
+  }
+}
+#block-menu-menu-m-s-sobre-drupal{
+  margin-left: 100px;
+}
+
+#block-menu-menu-m-s-sobre-drupal,
+#block-menu-menu-c-mo-participar-,
+#block-menu-menu-qu-hacer-en-puebla-,
+#block-menu-menu-d-nde-qudarse-,
+#block-block-5{
+  float: left;
+  width: 170px;
+  margin-right: 35px;
+  li{
+    list-style: none;
+    padding: 0px;
+  }
+  h2{
+    color:#fff;
+    font-size: 1.2em;
+  }
+  a{
+    color: #FFF;
+    text-decoration: none;
+    font-size: 1.1em;
+    line-height: 0px;
+  }
+}
+
+#block-block-4{
+  clear: both;
+  text-align: center;
+  color: #fff;
+  margin: 15px 0px 0px 0px;
+  font-size: 0.85em;
+  padding-top: 14px;
+  a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 1em;
+  }
+  a:hover {
+    text-decoration:  underline;
+  }
+}
+#block-block-6{
+  clear: both;
+  height: 125px;
+}
