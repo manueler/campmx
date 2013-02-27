@@ -1,5 +1,5 @@
 # Ignore configuration files that may contain sensitive information.
-drupal/sites/*/*settings*.php
+drupal/sites/*/settings*.php
 
 # Ignore paths that contain generated content.
 drupal/cache/
