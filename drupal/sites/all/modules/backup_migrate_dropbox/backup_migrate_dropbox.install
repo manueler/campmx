@@ -1,0 +1,26 @@
+<?php
+
+
+function backup_migrate_dropbox_requirements($phase) {
+  $requirements = array();
+  $t = get_t();
+  if ($phase == 'install') {
+    if(!file_exists('sites/all/libraries/DropboxUploader/DropboxUploader.php')) {
+      $requirements['dropbox'] = array(
+        'title' => $t('Dropbox Upload'),
+        'value' => $t('Missing'),
+        'description' =>  $t(
+          'Dropbox Uploader library is missing, please download Dropbox Uploader from !link and place it at !directory', 
+          array(
+            '!link' => 'http://jaka.kubje.org/projects/dropbox-uploader/',
+            '!directory' => 'sites/all/libraries/DropboxUploader',
+          )
+        ),
+        'severity' => REQUIREMENT_ERROR,
+      );
+    }
+  }
+  return $requirements;
+}
+
+
