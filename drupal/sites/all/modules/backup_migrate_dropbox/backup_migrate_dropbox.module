@@ -1,0 +1,21 @@
+<?php
+
+ 
+/**
+ * Implementation of hook_backup_migrate_destination_types().
+ */
+function backup_migrate_dropbox_backup_migrate_destination_types() {
+  return array(
+    'dropbox' => array(
+      'type_name' => t('Dropbox'),
+      'description' => t('Save the backup files to a !link account.', array('!link' => l(t('Dropbox'), 'http://www.dropbox.com/'))),
+      'file' => drupal_get_path('module', 'backup_migrate_dropbox') .'/destinations.dropbox.inc',
+      'class' => 'backup_migrate_destination_dropbox',
+      'can_create' => TRUE,
+    ),
+  );
+}
+
+
+
+
