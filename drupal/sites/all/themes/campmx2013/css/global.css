@@ -446,20 +446,27 @@ body{background:url(../images/bg-body.png) center top repeat}
    height: 620px;
 }
 
+.view-id-ponentes_magistrales .views-row.game-active .speaker-magistral .info-background{
+   height: 77px;
+   width: 100%;
+   bottom: 5px;
+   position: absolute;
+   background-color: #FFF;
+   opacity: 0.6;
+}
+
 .view-id-ponentes_magistrales .views-row .speaker-magistral .info{
    height: 77px;
    width: 100%;
    bottom: 5px;
    position: absolute;
    display:none;
-   background-color: #FFF;
-   opacity: 0.3;
    font-size: 14px;
    padding-left: 15px;
 }
 
 .view-id-ponentes_magistrales .views-row.game-active .speaker-magistral .info{
-   display: inline;
+   display: block;
 }
 
 .view-id-ponentes_magistrales .views-row .info .tw{
