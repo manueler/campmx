@@ -6,3 +6,5 @@ drupal/cache/
 drupal/files/
 drupal/sites/*/files
 drupal/sites/*/private
+
+*.sw*
