@@ -241,6 +241,8 @@ body{background:url(../images/bg-body.png) center top repeat}
 .container-12 .grid-8{width:740px}
 .container-12 .grid-4{width:415px}
 #block-block-2 div.block-inner{position:relative}
+
+#block-views-sponsors-block-3 h2.block-title,
 #block-block-2 h2.block-title{position:absolute;
 	background:url(../images/block-liston.png) no-repeat;
 	width:100%;
@@ -252,6 +254,8 @@ body{background:url(../images/bg-body.png) center top repeat}
 	font-size:2.7em;
 	text-align:center;
 	z-index:1}
+
+#block-views-sponsors-block-3 div.content,
 #block-block-2 div.content{border:1px solid #ccc;
 	width:90%;
 	margin:0 auto;
@@ -689,6 +693,7 @@ background-size: 47px;
 
 
 
+
 /*****************************************************************/
 /****************************HEADER*******************************/
 /*****************************************************************/
@@ -985,3 +990,15 @@ border:1px solid #ccc;
 /*********************************************************/
 /**************************FOOTER*************************/
 /*********************************************************/
+
+
+/** Block de patrocinadores **/
+#block-views-sponsors-block-3 div.content .view-display-id-block_3 {
+  padding: 10px 0;
+}
+
+#block-views-sponsors-block-3 div.content a {
+  display: block;
+  text-align: center;
+  margin: 15px 0;
+}
