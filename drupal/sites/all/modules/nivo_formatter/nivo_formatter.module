@@ -1,0 +1,449 @@
+<?php
+
+/**
+ * @file
+ *   The implementation of Nivo Formatter module.
+ */
+
+/**
+ * Implements hook_field_formatter_info().
+ * 
+ * Add nivo_formatter formatter.
+ */
+function nivo_formatter_field_formatter_info() {
+  $formatters = array(
+    'nivo_formatter' => array(
+      'label' => t('Nivo formatter'),
+      'field types' => array('image'),
+      'settings' => array(
+        'nivo_formatter_theme' => 'default',
+        'nivo_formatter_image_style' => 'large',
+        'nivo_slider_thumbnail' => array(
+          'controlNavThumbs' => FALSE,
+          'controlNavThumbsFromRel' => FALSE,
+          'thumbnail_style' => 'thumbnail',
+        ),
+        'nivo_formatter_nivo_slider' => array(
+          'effect' => array('random' => 'random'),
+          'slices' => 15,
+          'boxCols' => 8,
+          'boxRows' => 4,
+          'animSpeed' => 500,
+          'pauseTime' => 3000,
+          'startSlide' => 0,
+          'directionNav' => TRUE,
+          'directionNavHide' => TRUE,
+          'controlNav' => TRUE,
+          'keyboardNav' => TRUE,
+          'pauseOnHover' => TRUE,
+          'manualAdvance' => FALSE,
+          'captionOpacity' => 0.8,
+          'prevText' => 'Prev',
+          'nextText' => 'Next',
+//          'beforeChange' => 'function(){}',
+//          'afterChange' => 'function(){}',
+//          'slideshowEnd' => 'function(){}',
+//          'lastSlide' => 'function(){}',
+//          'afterLoad' => 'function(){}',
+        ),
+      ), //@todo
+      'description' => t('The world\'s most awesome jQuery Image Slider'),
+    )
+  );
+  return $formatters;
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function nivo_formatter_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  // if there are no images, dont do anything else
+  if (empty($items)) {
+    return;
+  }
+  $field_name = $instance['field_name'];
+  $entity_type_info = entity_get_info($entity_type);
+  $entity_id = $entity->{$entity_type_info['entity keys']['id']};
+  // Get field instance setting
+  $settings = $display['settings'];
+  // Setting image style, theme for Nivo Slider
+  $theme = $settings['nivo_formatter_theme'];
+  $style = $settings['nivo_formatter_image_style'];
+  $thumb_style = $settings['nivo_slider_thumbnail']['thumbnail_style'];
+  $isThumb = FALSE;
+  // Include Nivo Slider assets
+  $path = libraries_get_path('nivo-slider') . '/';
+  $module_path = drupal_get_path('module', 'nivo_formatter');
+
+  drupal_add_css($path . "themes/$theme/$theme.css");
+  drupal_add_css($path . "nivo-slider.css");
+  drupal_add_js($path . "jquery.nivo.slider.pack.js");
+  drupal_add_js($module_path . '/nivo_formatter.js');
+  drupal_add_js(array('nivo_formatter' => nivo_formatter_settings($field_name.'-'.$entity_id, $settings)), 'setting');
+
+  // Prepare images
+  $renderitems = array();
+  foreach ($items as $id => $item) {
+    $image = '';
+    $attributes = array();
+
+    // Generate thumbnail if needed.
+    if ($settings['nivo_slider_thumbnail']['controlNavThumbs']) {
+      $isThumb = TRUE;
+      drupal_add_css($module_path . '/nivo_formatter.css', array('group' => CSS_THEME));
+      // Check thumb style
+      if (!empty($thumb_style)) {
+        $attributes['data-thumb'] = image_style_url($thumb_style, $item['uri']);
+      }
+      else {
+        $attributes['data-thumb'] = file_create_url($item['uri']);
+      }
+    $attributes['rel']=$attributes['data-thumb'];
+    }
+    
+    // Generate image
+    if (!empty($style)) {
+      $image = theme_image_style(array(
+        'style_name' => $style,
+        'path' => $item['uri'],
+        'alt' => isset($item['alt']) ? $item['alt'] : FALSE,
+        'title' => isset($item['title']) ? $item['title'] : FALSE,
+        'attributes' => $attributes,
+        'width' => '',
+        'height' => '',
+      ));
+    }
+    else {
+      $image = theme_image(array(
+        'path' => $item['uri'],
+        'alt' => isset($item['alt']) ? $item['alt'] : FALSE,
+        'title' => isset($item['title']) ? $item['title'] : FALSE,
+        'attributes' => $attributes,
+      ));
+    }
+
+    $renderitems['images'][] = $image;
+  }
+
+  // Format
+  $element = array();
+  $element['#theme'] = 'nivo_formatter';
+  $element['#images'] = $renderitems['images'];
+  $element['#nivo_slider_theme'] = $theme;
+  $element['#field_name'] = $field_name .'-'. $entity_id;
+  $element['#isThumb'] = $isThumb;
+  return $element;
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ * @see http://nivo.dev7studios.com/support/jquery-plugin-usage/
+ */
+function nivo_formatter_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  $form = array();
+  $nivo_slider_effect = array(
+    'sliceDown',
+    'sliceDownLeft',
+    'sliceUp',
+    'sliceUpLeft',
+    'sliceUpDown',
+    'sliceUpDownLeft',
+    'fold',
+    'fade',
+    'random',
+    'slideInRight',
+    'slideInLeft',
+    'boxRandom',
+    'boxRain',
+    'boxRainReverse',
+    'boxRainGrow',
+    'boxRainGrowReverse'
+  );
+  $options = array(t('None'));
+  foreach (image_styles() as $id => $style) {
+    $options[$id] = $id;
+  }
+  $settings = $instance['display'][$view_mode]['settings'];
+  $themes = nivo_formatter_nivo_slider_themes();
+
+  // -- Basic settings --
+  $form['nivo_formatter_theme'] = array(
+    '#type' => 'select',
+    '#title' => t('Nivo slider theme'),
+    '#options' => $themes,
+    '#default_value' => $settings['nivo_formatter_theme'],
+    '#description' => t('Select your nivo slider theme.'),
+  );
+  $form['nivo_formatter_image_style'] = array(
+    '#type' => 'select',
+    '#title' => t('Select image style'),
+    '#options' => $options,
+    '#default_value' => $settings['nivo_formatter_image_style'],
+    '#description' => t('Select the image style you would like to show.'),
+  );
+  // -- End of Basic settings --
+  // -- Thumbnail settings --
+  $form['nivo_slider_thumbnail'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Nivo Slider thumbnail settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#tree' => TRUE,
+  );
+  $form['nivo_slider_thumbnail']['controlNavThumbs'] = array(
+    '#type' => 'checkbox',
+    '#return_value' => TRUE,
+    '#title' => t('Enable navigation thumbnail'),
+    '#default_value' => $settings['nivo_slider_thumbnail']['controlNavThumbs'],
+    '#description' => t('Using Thumbnails with the Nivo Slider'),
+  );
+  $form['nivo_slider_thumbnail']['thumbnail_style'] = array(
+    '#type' => 'select',
+    '#title' => t('Select thumbnail image style'),
+    '#options' => $options,
+    '#default_value' => $settings['nivo_slider_thumbnail']['thumbnail_style'],
+    '#description' => t('Select the image style you would like thumbnail to show.'),
+  );
+  // -- End thumbnail settings --
+  // -- Advanced settings --
+  $form['nivo_formatter_nivo_slider'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Nivo Slider advanced settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#tree' => TRUE,
+  );
+  $form['nivo_formatter_nivo_slider']['effect'] = array(
+    '#type' => 'select',
+    '#title' => t('effect'),
+    '#options' => array_combine($nivo_slider_effect, $nivo_slider_effect),
+    '#default_value' => $settings['nivo_formatter_nivo_slider']['effect'],
+    '#description' => t('Specify sets like: \'fold,fade,sliceDown\''),
+    '#multiple' => TRUE,
+  );
+  $form['nivo_formatter_nivo_slider']['slices'] = array(
+    '#type' => 'textfield',
+    '#title' => t('slices'),
+    '#default_value' => $settings['nivo_formatter_nivo_slider']['slices'],
+    '#description' => t('For slice animations.'),
+  );
+  $form['nivo_formatter_nivo_slider']['boxCols'] = array(
+    '#type' => 'textfield',
+    '#title' => t('boxCols'),
+    '#default_value' => $settings['nivo_formatter_nivo_slider']['boxCols'],
+    '#description' => t('For box animations.'),
+  );
+  $form['nivo_formatter_nivo_slider']['boxRows'] = array(
+    '#type' => 'textfield',
+    '#title' => t('boxRows'),
+    '#default_value' => $settings['nivo_formatter_nivo_slider']['boxRows'],
+    '#description' => t('For box animations.'),
+  );
+  $form['nivo_formatter_nivo_slider']['animSpeed'] = array(
+    '#type' => 'textfield',
+    '#title' => t('animSpeed'),
+    '#default_value' => $settings['nivo_formatter_nivo_slider']['animSpeed'],
+    '#description' => t('Slide transition speed.'),
+  );
+  $form['nivo_formatter_nivo_slider']['pauseTime'] = array(
+    '#type' => 'textfield',
+    '#title' => t('pauseTime'),
+    '#default_value' => $settings['nivo_formatter_nivo_slider']['pauseTime'],
+    '#description' => t('How long each slide will show.'),
+  );
+  $form['nivo_formatter_nivo_slider']['startSlide'] = array(
+    '#type' => 'textfield',
+    '#title' => t('startSlide'),
+    '#default_value' => $settings['nivo_formatter_nivo_slider']['startSlide'],
+    '#description' => t('Set starting Slide (0 index).'),
+  );
+  $form['nivo_formatter_nivo_slider']['directionNav'] = array(
+    '#type' => 'textfield',
+    '#title' => t('directionNav'),
+    '#default_value' => $settings['nivo_formatter_nivo_slider']['directionNav'],
+    '#description' => t('Next & Prev navigation.'),
+  );
+  $form['nivo_formatter_nivo_slider']['directionNavHide'] = array(
+    '#type' => 'checkbox',
+    '#return_value' => TRUE,
+    '#title' => t('directionNavHide'),
+    '#default_value' => $settings['nivo_formatter_nivo_slider']['directionNavHide'],
+    '#description' => t('Only show on hover.'),
+  );
+  $form['nivo_formatter_nivo_slider']['controlNav'] = array(
+    '#type' => 'checkbox',
+    '#return_value' => TRUE,
+    '#title' => t('controlNav'),
+    '#default_value' => $settings['nivo_formatter_nivo_slider']['controlNav'],
+    '#description' => t('1,2,3... navigation.'),
+  );
+  $form['nivo_formatter_nivo_slider']['keyboardNav'] = array(
+    '#type' => 'checkbox',
+    '#return_value' => TRUE,
+    '#title' => t('keyboardNav'),
+    '#default_value' => $settings['nivo_formatter_nivo_slider']['keyboardNav'],
+    '#description' => t('Use left & right arrows.'),
+  );
+  $form['nivo_formatter_nivo_slider']['pauseOnHover'] = array(
+    '#type' => 'checkbox',
+    '#return_value' => TRUE,
+    '#title' => t('pauseOnHover'),
+    '#default_value' => $settings['nivo_formatter_nivo_slider']['pauseOnHover'],
+    '#description' => t('Stop animation while hovering.'),
+  );
+  $form['nivo_formatter_nivo_slider']['manualAdvance'] = array(
+    '#type' => 'checkbox',
+    '#return_value' => TRUE,
+    '#title' => t('manualAdvance'),
+    '#default_value' => $settings['nivo_formatter_nivo_slider']['manualAdvance'],
+    '#description' => t('Stop animation while hovering.'),
+  );
+  $form['nivo_formatter_nivo_slider']['captionOpacity'] = array(
+    '#type' => 'textfield',
+    '#title' => t('captionOpacity'),
+    '#default_value' => $settings['nivo_formatter_nivo_slider']['captionOpacity'],
+    '#description' => t('Universal caption opacity.'),
+  );
+  $form['nivo_formatter_nivo_slider']['prevText'] = array(
+    '#type' => 'textfield',
+    '#title' => t('prevText'),
+    '#default_value' => $settings['nivo_formatter_nivo_slider']['prevText'],
+    '#description' => t('Prev directionNav text.'),
+  );
+  $form['nivo_formatter_nivo_slider']['nextText'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Next'),
+    '#default_value' => $settings['nivo_formatter_nivo_slider']['nextText'],
+    '#description' => t('Next directionNav text.'),
+  );
+//  $form['nivo_formatter']['nivo_slider']['beforeChange'] = array(
+//    '#type' => 'textarea',
+//    '#title' => t('beforeChange'),
+//    '#default_value' => $settings['nivo_formatter_nivo_slider']['beforeChange'],
+//    '#description' => t('Triggers before a slide transition.'),
+//  );
+//  $form['nivo_formatter']['nivo_slider']['afterChange'] = array(
+//    '#type' => 'textarea',
+//    '#title' => t('afterChange'),
+//    '#default_value' => $settings['nivo_formatter_nivo_slider']['afterChange'],
+//    '#description' => t('Triggers after a slide transition.'),
+//  );
+//  $form['nivo_formatter']['nivo_slider']['slideshowEnd'] = array(
+//    '#type' => 'textarea',
+//    '#title' => t('slideshowEnd'),
+//    '#default_value' => $settings['nivo_formatter_nivo_slider']['slideshowEnd'],
+//    '#description' => t('Triggers after all slides have been shown.'),
+//  );
+//  $form['nivo_formatter']['nivo_slider']['lastSlide'] = array(
+//    '#type' => 'textarea',
+//    '#title' => t('lastSlide'),
+//    '#default_value' => $settings['nivo_formatter_nivo_slider']['lastSlide'],
+//    '#description' => t('Triggers when last slide is shown.'),
+//  );
+//  $form['nivo_formatter']['nivo_slider']['afterLoad'] = array(
+//    '#type' => 'textarea',
+//    '#title' => t('afterLoad'),
+//    '#default_value' => $settings['nivo_formatter_nivo_slider']['afterLoad'],
+//    '#description' => t('Triggers when slider has loaded.'),
+//  );
+  // -- End of Advanced settings --
+
+  return $form;
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function nivo_formatter_field_formatter_settings_summary($field, $instance, $view_mode) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+
+  $summary = '';
+
+  if ($display['type'] == 'nivo_formatter') {
+    $message = 'You are using Nivo slider with theme: <strong>@theme</strong> and image style: <strong>@style</strong><br>';
+    if ($settings['nivo_slider_thumbnail']['controlNavThumbs']) {
+      $message .= 'You have enabled thumbnail with image style <strong>@thumb_style</strong><br>';
+    }
+
+    $summary = t($message, array(
+      '@theme' => $settings['nivo_formatter_theme'],
+      '@style' => !empty($settings['nivo_formatter_image_style']) ? $settings['nivo_formatter_image_style'] : t('None (original image)'),
+      '@thumb_style' => !empty($settings['nivo_slider_thumbnail']['thumbnail_style']) ? $settings['nivo_slider_thumbnail']['thumbnail_style'] : t('None (original image)'),
+            ));
+  }
+
+  return $summary;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function nivo_formatter_theme() {
+  return array(
+    'nivo_formatter' => array(
+      'variables' => array('images' => NULL, 'nivo_slider_theme' => 'default', 'field_name' => NULL, 'isThumb' => FALSE),
+      'template' => 'nivo_formatter',
+    )
+  );
+}
+
+/**
+ * Scan Nivo Slider theme folder an return theme list.
+ */
+function nivo_formatter_nivo_slider_themes() {
+  // Path to nivo slider theme
+  $theme_path = libraries_get_path('nivo-slider') . '/themes';
+  // List themes
+  $files = file_scan_directory($theme_path, '/.*/', array('recurse' => FALSE));
+
+  $themes = array();
+  if (is_array($files)) {
+    foreach ($files as $path => $file) {
+      if (is_dir($path) && file_exists($path . '/' . $file->filename . '.css')) {
+        $themes[] = $file->filename;
+      }
+    }
+  }
+
+  return array_combine($themes, $themes);
+}
+
+/**
+ * Settings prepare
+ * @param array $settings
+ *   Field instance formatter settings
+ */
+function nivo_formatter_settings($field_name, $settings) {
+  $nivo_slide = $settings['nivo_formatter_nivo_slider'];
+  $nivo_thumb = $settings['nivo_slider_thumbnail'];
+
+  // Flatten effect array to string.
+  if (is_array($settings['nivo_formatter_nivo_slider']['effect'])) {
+    $nivo_slide['effect'] = implode(',', $nivo_slide['effect']);
+  }
+
+  // Return settings array
+  return array(
+    $field_name => array(
+      'effect' => $nivo_slide['effect'],
+      'slices' => $nivo_slide['slices'],
+      'boxCols' => $nivo_slide['boxCols'],
+      'boxRows' => $nivo_slide['boxRows'],
+      'animSpeed' => $nivo_slide['animSpeed'],
+      'pauseTime' => $nivo_slide['pauseTime'],
+      'startSlide' => $nivo_slide['startSlide'],
+      'directionNav' => $nivo_slide['directionNav'],
+      'directionNavHide' => $nivo_slide['directionNavHide'],
+      'controlNav' => $nivo_slide['controlNav'],
+      'controlNavThumbs' => $nivo_thumb['controlNavThumbs'],
+      'controlNavThumbsFromRel' => $nivo_thumb['controlNavThumbs'],
+      'keyboardNav' => $nivo_slide['keyboardNav'],
+      'pauseOnHover' => $nivo_slide['pauseOnHover'],
+      'manualAdvance' => $nivo_slide['manualAdvance'],
+      'captionOpacity' => $nivo_slide['captionOpacity'],
+      'prevText' => $nivo_slide['prevText'],
+      'nextText' => $nivo_slide['nextText'],
+    ),
+  );
+}
