@@ -24,3 +24,13 @@ function campmx2013_preprocess_user_register_form(&$vars) {
 	drupal_add_css(drupal_get_path('theme', 'campmx2013') . 'css/registro.css', array('group' => CSS_THEME, 'type' => 'file')); 
 	print_r("hola");
 }
+
+function campmx2013_preprocess_node($vars) {
+
+  //if (drupal_get_path_alias("node/{$vars['#node']->nid}") == 'foo') {
+
+	if(current_path() == 'node/202' )
+	{
+    drupal_add_css(drupal_get_path('theme', 'campmx2013') . "/css/hotel.css");
+  }
+}

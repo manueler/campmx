@@ -1,0 +1,256 @@
+/*#page-title {
+	display: none;
+}*/
+
+#main-content #page-title {
+	display: block !important;
+}
+
+#block-system-main {
+	font: 100 20px/1.8 "rokkit" !important;
+}
+
+
+#block-system-main .group-left .field-name-body p span{
+	font: 100 20px/1.8 "rokkit" !important;
+}
+
+#block-system-main .group-left .field-name-field-tipo-de-lugar- {
+	display: none;
+}
+
+#block-system-main .group-footer .field-name-field-sitio-web- .field-label {
+	color: #19A0E4;
+}
+
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-label {
+	display: none;
+}
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item {
+	color: #86d7f4;
+
+}
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .precios {
+		padding: 0px;
+		position: relative;
+		clear: both;
+		display: block;
+		overflow: hidden;
+		width: 633px;
+		float: none;
+		margin-left: auto;
+		margin-right: auto;
+			-webkit-border-radius:15px;
+	-moz-border-radius:15px;
+	-ms-border-radius:15px;
+	-o-border-radius:15px;
+	border-radius:15px;
+	border: 1px solid #0fb1ea;
+}
+
+
+
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .precios .titles {
+	clear: both;
+	font: 400 25px/1.3 "rokkit" !important;
+	color: #7babc5; 
+	background: #2273a5 !important;
+}
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .precios .titles-line{
+	float: left;
+}
+
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .precios .line-1 {
+	clear:both;
+}
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .precios .lines-count-1{
+	float: left;
+}
+
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .precios .line-2 {
+	clear:both;
+}
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .precios .lines-count-2{
+	float: left;
+}
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .precios .line-3 {
+	clear:both;
+}
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .precios .lines-count-3{
+	float: left;
+}
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .precios .line-4 {
+	clear:both;
+}
+
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .precios .lines-count-4{
+	float: left;
+}
+
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .precios .lines{
+	clear:both;
+	display: block;
+	padding: 0px;
+	position: relative;
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: auto;
+	height: 61px;
+	background: #33abf5;
+}
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .precios .lines-description {
+	color: #8cd1ff;
+}
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .precios .lines-description:hover {
+	background: #ff611d;
+	color: white;
+}
+
+
+#block-system-main .group-footer .field-name-field-sitio-web- {
+	margin-top: 15px;
+
+
+}
+
+
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .precios .line-4 .item-precios {
+	border-bottom: none;
+
+}
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .precios .col-3 {
+	border-right: none !important;
+
+}
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .precios .item-precios {
+	width: 210px;
+	text-align:center;
+	border-bottom: 1px solid #0fb1ea;
+	height:60px;
+	border-right: 1px solid #0fb1ea;
+
+}
+
+
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .precios .lines p{
+	line-height: 20px !important;
+	clear: both;
+	display: block;
+	padding: 0px;
+	position: relative;
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: auto;
+	height:  60px;
+	margin-top: auto;
+}
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .precios .lines p span{
+	clear: both;
+	display: block;
+	padding: 0px;
+
+	overflow: hidden;
+	/*
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: auto;
+	margin-bottom: auto;*/
+	top:50%; 
+	height:60px; 
+	margin-top:-16px;
+	left: 50%;
+	margin-left: -105px;
+	position: absolute;
+	width: 210px;
+
+}
+
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .sitio-web {
+	width: 70px;
+	float: left;
+	margin-top: 15px;
+}
+
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .sitio-web  a {
+	text-decoration: none;
+	
+	/*border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+ 	border: 1px solid #000;*/
+ 	text-align: center;
+	/*background: #0fb1ea;*/
+	text-shadow: #ffffff 0px 2px 3px;
+
+	/*border: 1px solid #0062a0;*/
+	color: #19a0e4;
+	width: 70px;
+	height: 40px;
+	display: block;
+	position: relative;
+
+
+}
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .contacto {
+	float: right;
+	width: auto;
+	margin-top: 15px;
+}
+
+
+#block-system-main .group-footer .field-name-field-lista-de-precios .field-items .field-item .contacto    a {
+	text-decoration: none;
+	
+	/*border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+ 	border: 1px solid #000;*/
+ 	text-align: center;
+	/*background: #0fb1ea;*/
+	text-shadow: #ffffff 0px 2px 3px;
+
+	/*border: 1px solid #0062a0;*/
+	color: #19a0e4;
+	width: 70px;
+	height: 40px;
+	display: block;
+	position: relative;
+
+
+}
+
+
+/*
+
+#block-system-main .field-name-body p {
+	color: #19A0E4;	
+
+	font: 900 40px/1 "rokkit" !important;
+}
+*/
