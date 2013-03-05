@@ -33,7 +33,7 @@ function campmx2013_preprocess_node($vars) {
 
   //if (drupal_get_path_alias("node/{$vars['#node']->nid}") == 'foo') {
 
-	if(current_path() == 'node/202' )
+	if(current_path() == 'node/202' || current_path() == 'node/218'  )
 	{
     drupal_add_css(drupal_get_path('theme', 'campmx2013') . "/css/hotel.css");
     drupal_add_js('sites/all/themes/campmx2013/js/hotel.js');
