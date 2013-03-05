@@ -250,6 +250,10 @@
 
 }
 
+/*.block-webform .form-item label {
+	display: none;
+}
+
 /*
 
 #block-system-main .field-name-body p {
