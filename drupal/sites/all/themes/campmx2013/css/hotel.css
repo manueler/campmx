@@ -11,11 +11,11 @@
 }
 
 
-#block-system-main .group-left .field-name-body p span{
+#block-system-main .group-footer .field-name-body p span{
 	font: 100 20px/1.8 "rokkit" !important;
 }
 
-#block-system-main .group-left .field-name-field-tipo-de-lugar- {
+#block-system-main .group-footer .field-name-field-tipo-de-lugar- {
 	display: none;
 }
 
@@ -245,6 +245,10 @@
 
 }
 
+.block-webform h2 {
+	display: none;
+
+}
 
 /*
 
