@@ -1,0 +1,36 @@
+/* 
+    Document   : nivo_formatter.css
+    Created on : Aug 25, 2011, 2:11:44 PM
+    Author     : olragon
+    Description:
+        Show Nivo Slider thumbnail.
+        Copy from http://nivo.dev7studios.com/wp-content/plugins/nivo-slider-pro/scripts/nivo-slider/themes/default/default.css?ver=3.2.1
+*/
+.nivoSlider-thumb {
+  display:inline-block;
+  margin-bottom:100px; /* Tweak this to push content down */
+}
+.nivoSlider-thumb .nivo-controlNav {
+  position:absolute;
+  left:0px;
+  bottom:-100px; /* Tweak this to push thumbnails down */
+  margin:0;
+}
+.nivoSlider-thumb .nivo-controlNav a {
+  display:inline;
+  background:none;
+  text-indent:0px;
+  border:0;
+  margin-right:10px;
+  float:none;
+}
+.nivoSlider-thumb .nivo-controlNav a.active img {
+  -webkit-box-shadow: 0px 1px 5px 0px #4a4a4a;
+  -moz-box-shadow: 0px 1px 5px 0px #4a4a4a;
+  box-shadow: 0px 1px 5px 0px #4a4a4a;
+}
+.nivoSlider-thumb .nivo-controlNav img {
+  display:inline;
+  position:inherit;
+  margin-right:10px;
+}

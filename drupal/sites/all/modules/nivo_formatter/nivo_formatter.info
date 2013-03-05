@@ -1,0 +1,16 @@
+name = Nivo Formatter
+description = Nivo slider image field formatter.
+core = 7.x
+dependencies[] = image
+dependencies[] = libraries
+dependencies[] = jquery_update
+package = Fields
+files[] = nivo_formatter.module
+files[] = nivo_formatter.field.inc
+
+; Information added by drupal.org packaging script on 2013-02-22
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "nivo_formatter"
+datestamp = "1361539067"
+
