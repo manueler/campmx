@@ -16,6 +16,10 @@ function campmx2013_preprocess_page(&$variables){
   }else{
     //drupal_set_message("No es el front");
   }
+
+  if (isset($_GET['template']) && $_GET['template'] == 'colorbox') {
+    $variables['theme_hook_suggestions'][] = 'page__colorbox';
+  }
 }
 
 function campmx2013_preprocess_user_register_form(&$vars) {
@@ -23,4 +27,26 @@ function campmx2013_preprocess_user_register_form(&$vars) {
 
 	drupal_add_css(drupal_get_path('theme', 'campmx2013') . 'css/registro.css', array('group' => CSS_THEME, 'type' => 'file')); 
 	print_r("hola");
+}
+
+function campmx2013_preprocess_node($vars) {
+
+  //if (drupal_get_path_alias("node/{$vars['#node']->nid}") == 'foo') {
+
+	if(current_path() == 'node/218'  )
+	{
+    drupal_add_css(drupal_get_path('theme', 'campmx2013') . "/css/hotel.css");
+    drupal_add_js('sites/all/themes/campmx2013/js/hotel.js');
+
+      global $user;
+  if ($user->uid == 0) {
+    $vars['loginpopup'] = "<div style='display:none'>" ;
+    $vars['loginpopup'] .= "<div id='login-pop'>" ;
+    $vars['loginpopup'] .= drupal_render(drupal_get_form('user_login'));
+    $vars['loginpopup'] .= "</div>";
+    $vars['loginpopup'] .= "</div>";
+  }
+  }
+
+
 }

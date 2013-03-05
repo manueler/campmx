@@ -1,0 +1,30 @@
+<?php
+/**
+ * @file
+ * 
+ */
+/**
+ * Implements hook_requirements
+ */
+function nivo_formatter_requirements($phase = 'install') {
+  $requirements = array();
+  if (!module_exists('libraries')) {
+    $requirements[] = array(
+      'title' => 'Require module <a href="http://drupal.org/project/libraries">libraries</a>',
+      'value' => time(),
+      'description' => 'You must install libraries module first.',
+      'severity' => REQUIREMENT_ERROR,
+    );
+    return $requirements;
+  }
+  if (!file_exists(libraries_get_path('nivo-slider') . '/jquery.nivo.slider.pack.js')) {
+    $requirements[] = array(
+      'title' => 'Require libraries <a href="http://nivo.dev7studios.com/">Nivo Slider</a>',
+      'value' => time(),
+      'description' => 'You need download, extract <a href="http://nivo.dev7studios.com/">Nivo Slider</a> to sites/all/libraries
+        and ensure this path is correct sites/all/libraries/nivo-slider/jquery.nivo.slider.pack.js.',
+      'severity' => REQUIREMENT_ERROR,
+    );
+  }
+  return $requirements;
+}
