@@ -63,8 +63,8 @@ a:hover{text-decoration:underline}
 body{background:url(../images/bg-body.png) center top repeat}
 #zone-footer-wrapper{background:url(../images/bg-footer.png) center bottom repeat-x}
 .logo-img{position:absolute;
-	width:255px;
-	height:255px;
+	width:200px;
+	height:200px;
 	background:white;
 	/*top:-70px;*/
 	-webkit-border-radius:128px;
@@ -76,10 +76,10 @@ body{background:url(../images/bg-body.png) center top repeat}
 	-moz-box-shadow:rgba(0,0,0,0.5) 5px 5px 12px;
 	box-shadow:rgba(0,0,0,0.5) 5px 5px 12px;
 	text-align:center;
-	line-height:255px;
+	line-height:200px;
 	z-index:5}
-.logo-img a{width:255px;
-	height:255px;
+.logo-img a{width:200px;
+	height:200px;
 	position:absolute;
 	left:0px;
 	z-index:1}
@@ -89,14 +89,13 @@ body{background:url(../images/bg-body.png) center top repeat}
 	background-image:-moz-linear-gradient(#0eaee8,#098cc9);
 	background-image:-o-linear-gradient(#0eaee8,#098cc9);
 	background-image:linear-gradient(#0eaee8,#098cc9);
-	min-height:80px}
-#zone-menu-wrapper{background:#0fb1ea;
-	min-height:90px}
+	min-height:45px}
+#zone-menu-wrapper{background:#0fb1ea;}
 #block-nice-menus-1{display:inline;
 	float:right}
 #block-nice-menus-1 .content ul li{background:none;
 	border:none;
-	padding:21px 5px;
+	padding:5px 5px;
 	-webkit-transition-property:background;
 	-moz-transition-property:background;
 	-o-transition-property:background;
@@ -338,7 +337,7 @@ body{background:url(../images/bg-body.png) center top repeat}
 #block-system-user-menu{position:relative}
 #block-system-user-menu .block-inner{position:absolute;
 	right:0px;
-	margin-top:22px}
+	margin-top:5px}
 #block-system-user-menu .block-inner ul li{list-style:none;
 	float:left;
 	margin-left:25px}
@@ -498,7 +497,7 @@ body{background:url(../images/bg-body.png) center top repeat}
 }
 
 #block-block-1{
-   padding: 60px 0px;
+   padding: 35px 0px;
    box-sizing: border-box;
 }
 
