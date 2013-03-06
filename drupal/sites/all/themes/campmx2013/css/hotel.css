@@ -2,8 +2,19 @@
 	display: none;
 }*/
 
-#main-content #page-title {
+#main-content {
+		display: block !important;
+}
+
+#page-title {
 	display: block !important;
+	background: url("../images/marriot2.png") 520px 0px no-repeat;
+	height: 190px !important;
+	position: relative;
+	clear: both;
+	overflow: visible;
+	line-height: 190px;
+
 }
 
 #block-system-main {
@@ -248,6 +259,10 @@
 .block-webform h2 {
 	display: none;
 
+}
+
+/*.block-webform .form-item label {
+	display: none;
 }
 
 /*
