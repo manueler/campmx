@@ -1,0 +1,241 @@
+<?php
+
+/**
+ * @file
+ * Provides the Bank Transfer payment method for use in Drupal Commerce.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function commerce_bank_transfer_menu() {
+  $items = array();
+
+  // Add a menu item for capturing authorizations.
+  $items['admin/commerce/orders/%commerce_order/payment/%commerce_payment_transaction/bank-transfer-confirm'] = array(
+    'title' => 'Confirm payment',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('commerce_bank_transfer_confirm_form', 3, 5),
+    'access callback' => 'commerce_bank_transfer_transaction_confirm_access',
+    'access arguments' => array(3, 5),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'context' => MENU_CONTEXT_INLINE,
+    'weight' => 2,
+    'file' => 'includes/commerce_bank_transfer.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Access callback function to limit use to non-completed bank transfers
+ */
+function commerce_bank_transfer_transaction_confirm_access($order, $transaction = NULL, $account = NULL) {
+  $access = commerce_payment_transaction_access('update', $transaction, $account);
+  if ($access && $transaction) {
+    if ($transaction->payment_method != 'bank_transfer') {
+      $access = FALSE;
+    }
+    else if ($transaction->status == COMMERCE_PAYMENT_STATUS_SUCCESS) {
+      $access = FALSE;
+    }
+  }
+  return $access;
+}
+
+/**
+ * Implements hook_commerce_payment_method_info().
+ */
+function commerce_bank_transfer_commerce_payment_method_info() {
+  $payment_methods = array();
+
+  $payment_methods['bank_transfer'] = array(
+    'base' => 'commerce_bank_transfer',
+    'title' => t('Bank Transfer'),
+    'description' => t('Receive direct money transfers initiated by the customer to your bank account.'),
+  );
+
+  return $payment_methods;
+}
+
+/**
+ * Payment method callback: settings form.
+ */
+function commerce_bank_transfer_settings_form($settings = NULL) {
+  $form = array();
+  // Merge default settings into the stored settings array.
+  $settings = (array) $settings + array(
+    'commerce_bank_transfer_bank_code_appellation' => 'Bank code',
+    'commerce_bank_transfer_subject_oid' => FALSE,
+  );
+
+  // help text
+  $form['commerce_bank_transfer_help_text'] = array(
+    '#markup' => '<div class="help">' . t('<h4><strong>Setup instructions</strong></h4><p>For better customer experience please use the token [order-payment-bank-details] to display the bank details on the invoice. You can find an example invoice template doing this in the commerce_bank_transfer module folder.</p><p>Enter the bank account details to display to customers who choose this payment method during checkout. Details left empty will not be shown. You can also choose to leave all bank details empty and create your own output using the payment instructions.</p>') . '</div>', // TODO update needed - this is how Ubercart worked...
+  );
+  // settings
+  $form['details'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Bank details'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+  $form['details']['account_owner'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Account owner'),
+    '#description' => t('Name associated with bank account.'),
+    '#default_value' => isset($settings['details']['account_owner']) ? $settings['details']['account_owner'] : '', // TODO how do i18n_variables work in D7? this should be one of them..
+    '#required' => FALSE,
+  );
+  $form['details']['account_number'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Account number'),
+    '#default_value' => isset($settings['details']['account_number']) ? $settings['details']['account_number'] : '',
+    '#required' => FALSE,
+  );
+  $form['details']['account_iban'] = array(
+    '#type' => 'textfield',
+    '#title' => t('IBAN'),
+    '#description' => t('International Bank Account Number'),
+    '#default_value' => isset($settings['details']['account_iban']) ? $settings['details']['account_iban'] : '',
+    '#required' => FALSE,
+  );
+  $form['details']['bank_code_appellation'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Bank code appellation'),
+    '#description' => t('Appellation of bank code - depending on where your bank is located you should set this to: "BSB" (AU), "Sort code" (UK), "Bank code" (DE), "Clearing number" (CH), "Routing transit number" (US) or "Bank transit number" (CA)'),
+    '#default_value' => isset($settings['details']['bank_code_appellation']) ? $settings['details']['bank_code_appellation'] : '',
+    '#required' => FALSE,
+  );
+  $form['details']['bank_code'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Bank code'),
+    '#description' => t('Actual bank code, will be shown with appellation set above'),
+    '#default_value' => isset($settings['details']['bank_code']) ? $settings['details']['bank_code'] : '',
+    '#required' => FALSE,
+  );
+  $form['details']['account_swift'] = array(
+    '#type' => 'textfield',
+    '#title' => t('SWIFT'),
+    '#description' => t('SWIFT-Code (aka BIC = Bank Identifier Code)'),
+    '#default_value' => isset($settings['details']['account_swift']) ? $settings['details']['account_swift'] : '',
+    '#required' => FALSE,
+  );
+  $form['details']['account_bank'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Banking institution'),
+    '#default_value' => isset($settings['details']['account_bank']) ? $settings['details']['account_bank'] : '',
+    '#required' => FALSE,
+  );
+  $form['details']['account_branch'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Branch office'),
+    '#default_value' => isset($settings['details']['account_branch']) ? $settings['details']['account_branch'] : '',
+    '#required' => FALSE,
+  );
+  $form['subject_oid'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Display "Reason for payment: order number <i>[order ID]</i>"'),
+    '#description' => t('Note: with this option enabled the details cannot be displayed on the checkout page (only later).'), // TODO update to new mechanism and terminology
+    '#default_value' => isset($settings['subject_oid']) ? $settings['subject_oid'] : 0,
+  );
+  $form['policy'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Payment instructions'),
+    '#description' => t('Instructions for customers on the checkout page. Use &lt;br /&gt; for line break.'),
+    '#default_value' => isset($settings['policy']) ? $settings['policy'] : '',
+    '#required' => FALSE,
+    '#rows' => 3,
+  );
+
+  return $form;
+}
+
+/**
+ * Payment method callback: checkout form.
+ */
+function commerce_bank_transfer_submit_form($payment_method, $pane_values, $checkout_pane, $order) {
+  $form = array();
+
+  // Merge in values from the order.
+  if (!empty($order->data['bank_transfer'])) {
+    $pane_values += $order->data['bank_transfer'];
+  }
+
+  $form['bank_details'] = array(
+  // TODO add message about details will be in email.. but email and token not yet done..
+    '#markup' => '<p><strong>' . t('Please make payment to:') . '</strong><br />' . commerce_bank_transfer_bank_details($order->order_id, $payment_method) . '</p>',
+  // TODO "Account owner" was/is the infamouse "To" in uc_bank_transfer depending on how the online and email invoice is looking we can move "Account owner" into commerce_bank_transfer_bank_details()
+  // TODO in uc_bank_transfer we sent the details through a theming function - should we still do this?
+  );
+
+  return $form;
+}
+
+/**
+ * Payment method callback: checkout form submission.
+ */
+function commerce_bank_transfer_submit_form_submit($payment_method, $pane_form, $pane_values, $order, $charge) {
+  commerce_bank_transfer_transaction($payment_method, $order, $charge);
+}
+
+/**
+ * Creates the payment transaction for the specified charge amount,
+ * but puts the status on pending for "offline" payment
+ *
+ * @param $payment_method
+ *   The payment method instance object used to charge this payment.
+ * @param $order
+ *   The order object the payment applies to.
+ * @param $charge
+ *   An array indicating the amount and currency code to charge.
+ */
+function commerce_bank_transfer_transaction($payment_method, $order, $charge) {
+  $transaction = commerce_payment_transaction_new('bank_transfer', $order->order_id);
+  $transaction->instance_id = $payment_method['instance_id'];
+  $transaction->amount = $charge['amount'];
+  $transaction->currency_code = $charge['currency_code'];
+  $transaction->status = COMMERCE_PAYMENT_STATUS_PENDING;
+
+  commerce_payment_transaction_save($transaction);
+}
+
+/**
+ * Implementation of commerce_bank_transfer_bank_details($oid).
+ *
+ * $oid = order ID
+ */
+function commerce_bank_transfer_bank_details($oid, $pm) {
+  if (!empty($pm['settings']['details']['account_owner'])) {
+    $bank_info[] = t('Account owner') . ': ' . $pm['settings']['details']['account_owner'];
+  }
+  if (!empty($pm['settings']['details']['account_number'])) {
+    $bank_info[] = t('Account number') . ': ' . $pm['settings']['details']['account_number'];
+  }
+  if (!empty($pm['settings']['details']['account_iban'])) {
+    $bank_info[] = t('IBAN') . ': ' . $pm['settings']['details']['account_iban'];
+  }
+  if (!empty($pm['settings']['details']['bank_code'])) {
+    $bank_info[] = $pm['settings']['details']['bank_code_appellation'] . ': ' . $pm['settings']['details']['bank_code'];
+  }
+  if (!empty($pm['settings']['details']['account_swift'])) {
+    $bank_info[] = t('SWIFT') . ': ' . $pm['settings']['details']['account_swift'];
+  }
+  if (!empty($pm['settings']['details']['account_bank'])) {
+    $bank_info[] = t('Banking institution') . ': ' . $pm['settings']['details']['account_bank'];
+  }
+  if (!empty($pm['settings']['details']['account_branch'])) {
+    $bank_info[] = t('Branch office') . ': ' . $pm['settings']['details']['account_branch'];
+  }
+  if (!empty($pm['settings']['subject_oid'])) {
+    isset($bank_info) ? ($bank_info[] = '<br />' . t('Reason for payment') . ': ' . t('order number') . ' ' . $oid) : ($bank_info[] = t('Reason for payment') . ': ' . t('order number') . ' ' . $oid);
+  }
+  if (!empty($pm['settings']['policy'])) {
+    isset($bank_info) ? ($bank_info[] = '<br />' . $pm['settings']['policy']) : ($bank_info[] = $pm['settings']['policy']);
+  }
+
+  isset($bank_info) ? ($bank_details = implode('<br />', $bank_info)) : ($bank_details = '');
+
+  return $bank_details;
+}
+

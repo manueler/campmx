@@ -943,13 +943,13 @@ border:1px solid #ccc;
 
 /*---------Social----------*/
 #block-widgets-s-socialmedia-share-default {
-	width: 184px;
+	width: 100%;
 	margin-left:  auto;
 	margin-right:  auto;
 }
 
 #widgets-element-socialmedia_share-default {
-	width: 205px;
+	width: 250px;
 	margin-left:  auto;
 	margin-right:  auto;
 }
@@ -959,8 +959,11 @@ border:1px solid #ccc;
 }
 
 #widgets-element-socialmedia_addthis-facebook-like {
-	width: 45px;
+	width: 90px;
 	margin-right: 20px;
+}
+#widgets-element-socialmedia_addthis-facebook-like iframe{
+	width: 90px !important;
 }
 /*---------Social----------*/
 

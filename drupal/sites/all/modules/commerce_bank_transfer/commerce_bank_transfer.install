@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * bank transfer cleanup database on uninstall
+ */
+function commerce_bank_transfer_uninstall() {
+  db_delete('variable')
+    ->condition('name', 'commerce_bank_transfer_%', 'LIKE')
+    ->execute();
+}
