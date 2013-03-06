@@ -498,8 +498,9 @@ body{background:url(../images/bg-body.png) center top repeat}
 }
 
 #block-block-1{
-   padding: 60px 0px;
+   padding: 10px 0px;
    box-sizing: border-box;
+   text-align: center;
 }
 
 .region-content h1{
@@ -1004,4 +1005,10 @@ border:1px solid #ccc;
   display: block;
   text-align: center;
   margin: 15px 0;
+}
+#block-views-sponsors-block-1 .views-row{
+   display: inline-block;
+}
+#block-views-sponsors-block-1{
+   text-align: left;
 }
