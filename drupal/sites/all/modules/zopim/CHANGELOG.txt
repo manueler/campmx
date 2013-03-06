@@ -1,0 +1,3 @@
+CHANGELOG for Zopim module for Drupal 7
+Zopim 1.0 (Nov 5, 2010)
+ Initial 7.x release
