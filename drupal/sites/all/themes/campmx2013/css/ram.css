@@ -3,6 +3,11 @@
   border-radius: 12px;  
 }
 
+.view-conferencias-y-talleres .views-row {
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 5px;
+}
+
 .view-conferencias-y-talleres .views-field-picture {
   float: left;
   margin-right: 12px;
@@ -14,11 +19,17 @@
 
 .view-conferencias-y-talleres .views-field-body {
   clear: both;
+  text-align: justify;
 }
 
 .view-conferencias-y-talleres .views-label {
   font-weight: bold;
   color: lightslategray;
+}
+
+.view-conferencias-y-talleres .views-label-field-slot-types-time-slot {
+  float: left;
+  padding-right: 5px;
 }
 
 .view-conferencias-y-talleres .views-field-field-slot-types-time-slot  {
