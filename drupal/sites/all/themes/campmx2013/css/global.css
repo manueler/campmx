@@ -1011,3 +1011,53 @@ border:1px solid #ccc;
 #block-views-sponsors-block-1{
    text-align: left;
 }
+.programa table.views-table{
+   margin: 40px 0;
+}
+.programa table.views-table caption{
+   font-size: 1.8em;
+   font-weight: bold;
+   margin-bottom: 10px;
+}
+.programa table.views-table th{
+   text-align: center;
+   width: 20%;
+}
+.programa table.views-table td{
+   text-align: center;
+   padding: 5px;
+}
+.programa td.views-field-field-tracks, .programa td.views-field-title{
+   text-align: justify !important;
+}
+.programa table.views-table th.views-field-field-slot-datetime-1{
+   width: 15%;
+}
+.programa table.views-table th.views-field-title{
+   width: 25%;
+}
+.programa table.views-table th.views-field-name{
+   width: 15%;
+}
+.programa table.views-table th.views-field-field-nivel{
+   width: 20%;
+}
+.programa table.views-table th.views-field-field-tracks{
+   width: 25%;
+}
+.redes-programa #block-widgets-s-socialmedia-share-default{
+   position: relative;
+   margin-bottom: 25px;
+}
+.redes-programa #block-widgets-s-socialmedia-share-default div.content{
+   position: absolute;
+   right: 0;
+}
+#edit-search-block-form--2{
+   width: 79%;
+   margin-left: 0.8%;
+}
+.tabs ul li{
+   display: block;
+   float: left;
+}
