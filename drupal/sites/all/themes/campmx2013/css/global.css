@@ -501,6 +501,9 @@ body{background:url(../images/bg-body.png) center top repeat}
    box-sizing: border-box;
 }
 
+#block-block-1 h1{
+	text-align: center;
+}
 .region-content h1{
    color: #19A0E4;
 }
@@ -942,13 +945,13 @@ border:1px solid #ccc;
 
 /*---------Social----------*/
 #block-widgets-s-socialmedia-share-default {
-	width: 184px;
+	width: 95%;
 	margin-left:  auto;
 	margin-right:  auto;
 }
 
 #widgets-element-socialmedia_share-default {
-	width: 205px;
+	width: 245px;
 	margin-left:  auto;
 	margin-right:  auto;
 }
@@ -958,8 +961,11 @@ border:1px solid #ccc;
 }
 
 #widgets-element-socialmedia_addthis-facebook-like {
-	width: 45px;
-	margin-right: 20px;
+	width: 85px;
+	margin-right: 10px;
+}
+#widgets-element-socialmedia_addthis-facebook-like iframe{
+	width: 85px !important;
 }
 /*---------Social----------*/
 
@@ -1000,4 +1006,53 @@ border:1px solid #ccc;
   display: block;
   text-align: center;
   margin: 15px 0;
+}
+
+/**nice menu**/
+
+#nice-menu-1 .menu-1699 ul{
+   margin-top: 35px;
+}
+
+#nice-menu-1 .menu-1699 ul{
+	background: #0fb1ea;
+}
+
+#nice-menu-1 .menu-1699 ul li a{
+	font-size: 1.6em;
+	width: 100% !important;
+}
+/** Programa **/
+.view-id-agenda_de_actividades caption{
+	margin: 10px 0px;
+}
+.view-id-agenda_de_actividades caption span{
+	font-size: 2em;
+	font-weight: bold;
+	font-family:"rokkit";
+}
+.view-id-agenda_de_actividades table th{
+	text-align:center;
+	font-weight: bold;
+}
+.view-id-agenda_de_actividades table td{
+	padding: 5px;
+}
+.view-id-agenda_de_actividades table th.views-field-field-slot-datetime-1{
+	width: 14%;
+}
+.view-id-agenda_de_actividades table th.views-field-title{
+	width: 25%;
+}
+.view-id-agenda_de_actividades table th.views-field-field-profile-last{
+	width: 25%;
+}
+.view-id-agenda_de_actividades table th.views-field-field-nivel{
+	width: 10%;
+}
+.view-id-agenda_de_actividades table th.views-field-field-tracks{
+	width: 20%;
+}
+.view-id-agenda_de_actividades table th.views-field-field-pais-1{
+	width: 5%;
 }
