@@ -1022,13 +1022,12 @@ border:1px solid #ccc;
 .programa table.views-table th{
    text-align: center;
    width: 20%;
+   font-weight: bold;
 }
 .programa table.views-table td{
-   text-align: center;
    padding: 5px;
 }
 .programa td.views-field-field-tracks, .programa td.views-field-title{
-   text-align: justify !important;
 }
 .programa table.views-table th.views-field-field-slot-datetime-1{
    width: 15%;
@@ -1037,13 +1036,16 @@ border:1px solid #ccc;
    width: 25%;
 }
 .programa table.views-table th.views-field-name{
-   width: 15%;
+   width: 25%;
 }
 .programa table.views-table th.views-field-field-nivel{
-   width: 20%;
+   width: 10%;
 }
 .programa table.views-table th.views-field-field-tracks{
-   width: 25%;
+   width: 20%;
+}
+.programa table.views-table th.views-field-field-pais-1{
+   width: 5%;
 }
 .redes-programa #block-widgets-s-socialmedia-share-default{
    position: relative;
@@ -1060,4 +1062,13 @@ border:1px solid #ccc;
 .tabs ul li{
    display: block;
    float: left;
+}
+.menu-1699 ul{
+   background: #0fb1ea;
+   margin-top: 35px !important;
+   margin-top: 20px;
+}
+.menu-1699 ul li a{
+   width: 100% !important;
+   font-size: 1.5em !important;
 }

@@ -8,13 +8,13 @@
 
 #page-title {
 	display: block !important;
-	background: url("../images/marriot2.png") 520px 0px no-repeat;
+	background: url("../images/marriott.jpg") right center no-repeat;
 	height: 190px !important;
 	position: relative;
 	clear: both;
 	overflow: visible;
 	line-height: 190px;
-
+	padding-left: 80px;
 }
 
 #block-system-main {
