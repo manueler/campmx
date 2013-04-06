@@ -48,6 +48,40 @@ function campmx2013_preprocess_node($vars) {
     $vars['loginpopup'] .= "</div>";
   }
   }
+}
 
+/**
+ * A preprocess function for our theme('flag'). It generates the
+ * variables needed there.
+ *
+ * The $variables array initially contains the following arguments:
+ * - $flag
+ * - $action
+ * - $content_id
+ * - $after_flagging
+ *
+ * See 'flag.tpl.php' for their documentation.
+ */
+function campmx2013_preprocess_flag(&$variables) {
+  global $user;
 
+  // Some typing shotcuts:
+  $flag =& $variables['flag'];
+
+  if ($flag->name == 'workshop_register') {
+    $account = user_load($user->uid);
+    $node = node_load($variables['content_id']);
+    $ok_to_print = FAlSE;
+    foreach ($node->field_tracks['und'] as $item) {
+      if ($item['tid'] == 23) { // this is a track session
+        $ok_to_print = TRUE;
+      }
+    }
+    if (empty($account->field_asistencia_confirmada['und'][0]['value'])) {
+      $ok_to_print = FALSE;
+    }
+    if (!$ok_to_print) {
+      $variables['flag_wrapper_classes'] .= ' element-hidden';
+    }
+  }
 }

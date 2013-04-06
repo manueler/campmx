@@ -1072,3 +1072,29 @@ border:1px solid #ccc;
    width: 100% !important;
    font-size: 1.5em !important;
 }
+#edit-buttons.checkout-buttons{
+	margin-top:35px;
+}
+#block-search-form{
+	margin-bottom: 10px;
+}
+.item-list ol li {
+  list-style: decimal;
+}
+.group-footer .flag-workshop_register{
+position: absolute;
+width: 100%;
+text-align: center;
+left: 0;
+height: 57px;
+line-height: 57px;
+font-size: 22pt;
+margin: 0px;
+padding: 0px;
+background: #EF6F22;
+border-radius: 0px 0px 10px 10px;
+margin-top: 2px;
+}
+.group-footer .flag-workshop_register a{
+  color: #fff;
+}
