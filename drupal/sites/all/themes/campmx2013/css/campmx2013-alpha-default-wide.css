@@ -1,27 +1,192 @@
-/* This file will hold styles that are loaded using the same media query as the wide grid. */
-
-/*****************************************************************/
-/****************************HEADER*******************************/
-/*****************************************************************/
-
-
-/********************************************************/
-/*---------------------ZONE BRANDING--------------------*/
-/********************************************************/
-
-
-/*------------------logo----------------*/
 .logo-img {
-	top: -100px !important;
+  top: -100px !important;
 }
-/*------------------logo----------------*/
+/****************************Slider Style*********************************/
+.block-views-slider-block {
+  background: rgba(0, 149, 204, 0.75);
+  height: 445px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  border-radius: 20px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 15px 20px -8px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 15px 20px -8px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 15px 20px -8px;
+  overflow: hidden;
+  position: relative;
+}
 
-/********************************************************/
-/*---------------------ZONE BRANDING--------------------*/
-/********************************************************/
+.block-views-slider-block #views_slideshow_controls_text_next_slider-block,
+.block-views-slider-block #views_slideshow_controls_text_previous_slider-block {
+  display: none;
+}
 
+.block-views-slider-block:hover #views_slideshow_controls_text_next_slider-block,
+.block-views-slider-block:hover #views_slideshow_controls_text_previous_slider-block {
+  display: block;
+}
 
-/*****************************************************************/
-/****************************HEADER*******************************/
-/*****************************************************************/
+.block-views-slider-block .view .view-content .item {
+  width: 1050px;
+  margin: 30px auto;
+  height: 360px;
+  background: white;
+  border-radius: 10px;
+}
 
+.block-views-slider-block .view .view-content .item .info {
+  width: 55%;
+  display: inline-block;
+  background: white;
+  border-radius: 10px;
+}
+
+.block-views-slider-block .view .view-content .item .title {
+  font-family: "rokkit";
+  color: #F27321;
+  font-size: 30px;
+  font-weight: bold;
+  margin: 10px 22px;
+}
+
+.block-views-slider-block .view .view-content .item .title a {
+  font-family: "rokkit";
+  color: #F27321;
+  font-size: 30px;
+  font-weight: bold;
+  margin: 0px;
+}
+
+.block-views-slider-block .view .view-content .item .body {
+  font-family: "lucida";
+  color: #808080;
+  font-size: 20px;
+  margin: 0px 30px 0px 30px;
+}
+
+.block-views-slider-block .view .view-content .item .body a {
+  color: #808080;
+}
+
+.block-views-slider-block .view .view-content .item .body p {
+  font-size: 17px;
+}
+
+.block-views-slider-block .view .view-content .item .image {
+  width: 38%;
+  height: 450px;
+  position: absolute;
+  top: 0px;
+  line-height: 450px;
+  right: 46px;
+  margin: 0px;
+  left: 650px;
+}
+
+.block-views-slider-block .view .view-content .item .image img {
+  width: 100%;
+  height: auto;
+  vertical-align: top;
+}
+
+.block-views-slider-block .view .view-content #widget_pager_bottom_slider-block {
+  position: absolute;
+  bottom: 16px;
+  margin: 0px 100px;
+  z-index: 100;
+}
+
+.block-views-slider-block .view .view-content #widget_pager_bottom_slider-block .views-slideshow-pager-field-item {
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
+  margin: 0px 5px;
+  width: 26px;
+  height: 26px;
+  background: url("../images/pager_slide.png") no-repeat;
+}
+
+.block-views-slider-block .view .view-content #widget_pager_bottom_slider-block .views-slideshow-pager-field-item.active {
+  background: url("../images/pager_slide_active.png") no-repeat;
+}
+
+.block-views-slider-block .view .view-content #views_slideshow_controls_text_slider-block #views_slideshow_controls_text_previous_slider-block {
+  background: url("../images/slider_prev.png") no-repeat;
+  width: 53px;
+  height: 61px;
+  position: absolute;
+  left: 8px;
+  top: 185px;
+  -webkit-transition-property: background;
+  -moz-transition-property: background;
+  -o-transition-property: background;
+  transition-property: background;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  text-indent: -119988px;
+  overflow: hidden;
+  text-align: left;
+  z-index: 100;
+}
+
+.block-views-slider-block .view .view-content #views_slideshow_controls_text_slider-block #views_slideshow_controls_text_previous_slider-block:hover {
+  background: url("../images/slider_prev_active.png") no-repeat;
+}
+
+.block-views-slider-block .view .view-content #views_slideshow_controls_text_slider-block #views_slideshow_controls_text_pause_slider-block {
+  display: none;
+}
+
+.block-views-slider-block .view .view-content #views_slideshow_controls_text_slider-block #views_slideshow_controls_text_next_slider-block {
+  background: url("../images/slider_next.png") no-repeat;
+  width: 53px;
+  height: 61px;
+  position: absolute;
+  right: 8px;
+  top: 185px;
+  -webkit-transition-property: background;
+  -moz-transition-property: background;
+  -o-transition-property: background;
+  transition-property: background;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  text-indent: -119988px;
+  overflow: hidden;
+  text-align: left;
+  z-index: 100;
+}
+
+.block-views-slider-block .view .view-content #views_slideshow_controls_text_slider-block #views_slideshow_controls_text_next_slider-block:hover {
+  background: url("../images/slider_next_active.png") no-repeat;
+}
+
+/**************************BLock Slide***********************/
+#block-views-sponsors-block-3 h2.block-title,
+#block-block-2 h2.block-title {
+  position: absolute;
+  background: url(../images/block-liston.png) no-repeat;
+  width: 100%;
+  height: 77px;
+  background-size: 100%;
+  font-family: "rokkit";
+  color: #FFF;
+  font-weight: bold;
+  font-size: 2.7em;
+  text-align: center;
+  z-index: 1;
+}
+/*******************Footer Links******************/
+#block-menu-menu-m-s-sobre-drupal, #block-menu-menu-c-mo-participar-, #block-menu-menu-qu-hacer-en-puebla-, #block-menu-menu-d-nde-qudarse-, #block-block-5 {
+  display: inline-block;
+  vertical-align: top;
+  width: 170px;
+  margin: 0px 32px 0px 32px;
+}

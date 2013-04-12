@@ -1,29 +1,90 @@
-/* This file will hold styles that are loaded using the same media query as the normal grid. */
-/* If you are using the default media queries provided by Omega, these styles will also
- *  apply to the widescreen layout unless they are overridden by the widescreen styles. */
-
-
-/*****************************************************************/
-/****************************HEADER*******************************/
-/*****************************************************************/
-
-
-/********************************************************/
-/*---------------------ZONE BRANDING--------------------*/
-/********************************************************/
-
-
-/*------------------logo----------------*/
+/***************************Logo Style*******************************/
 .logo-img {
-	top: -100px !important;
+  position: absolute;
+  top: -25px !important;
+  left: 0 !important;
 }
-/*------------------logo----------------*/
+/****************************Menu Style*********************************/
+#block-system-main-menu {
+  margin-bottom: 0px;
+}
 
-/********************************************************/
-/*---------------------ZONE BRANDING--------------------*/
-/********************************************************/
+#block-system-main-menu ul.menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+}
+
+#block-system-main-menu ul.menu li {
+  list-style: none;
+  background: none;
+  margin: 0px;
+  border: none;
+  -webkit-transition-property: background;
+  -moz-transition-property: background;
+  -o-transition-property: background;
+  transition-property: background;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+
+#block-system-main-menu ul.menu li:hover {
+  background: #f7931e;
+}
+
+#block-system-main-menu ul.menu li a {
+  display: block;
+  line-height: 1em;
+  padding: 0.5em;
+  outline: none;
+  color: #FFF;
+  color: white;
+  font-family: "rokkit";
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#block-system-main-menu ul.menu li a:hover {
+  text-decoration: none;
+}
+
+#block-system-main-menu ul.menu li span.over {
+  background: #CCC;
+  color: #000000;
+  display: block;
+  float: right;
+  height: 33px;
+  line-height: 30px;
+  padding: 0 0.5em;
+  text-align: center;
+  cursor: pointer;
+}
+
+#block-system-main-menu ul.menu li span.over:hover {
+  background: #F90;
+  color: white;
+}
+
+#block-system-main-menu ul.menu ul {
+  margin: 0;
+  padding: 0;
+  display: none;
+  background: #0fb1ea;
+}
+
+#block-system-main-menu ul.menu ul li a {
+  text-indent: 0;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+#block-system-main-menu ul.menu ul li a.last {
+  border-bottom: none;
+}
 
 
-/*****************************************************************/
-/****************************HEADER*******************************/
-/*****************************************************************/
+

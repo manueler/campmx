@@ -85,3 +85,11 @@ function campmx2013_preprocess_flag(&$variables) {
     }
   }
 }
+/**
+ * A preprocess function for our theme to load responsive menu
+ */
+function campmx2013_preprocess_html(&$variables){
+  drupal_add_js('sites/all/themes/campmx2013/js/menu.js', 'file');  
+}
+
+

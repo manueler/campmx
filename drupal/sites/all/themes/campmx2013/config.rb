@@ -4,7 +4,7 @@
 css_dir = "css"
 sass_dir = "sass"
 fonts_dir = "fonts"
-output_style =:compressed
+output_style =:expanded
 relative_assets = true
 line_comments = false
 

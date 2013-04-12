@@ -1,57 +1,294 @@
-/* This file will hold styles that are loaded using the same media query as the narrow grid. */
-/* If you are using the default media queries provided by Omega, these styles will also
- *  apply to the normal and widescreen layouts. You may override these styles in the normal 
- *  and widescreen CSS files as appropriate. */
-
- /*****************************************************************/
-/****************************HEADER*******************************/
-/*****************************************************************/
-
-
-/********************************************************/
-/*---------------------ZONE BRANDING--------------------*/
-/********************************************************/
-
-
-/*------------------logo----------------*/
-.logo-img {
-	top: 0px !important;
+/***************************Logo Style*******************************/
+.logo-img{
+    width:200px;
+    height:200px;
+    margin: 0px auto;
+    float: none;
 }
-/*------------------logo----------------*/
-
-/********************************************************/
-/*---------------------ZONE BRANDING--------------------*/
-/********************************************************/
-
-
-/*****************************************************************/
-/****************************HEADER*******************************/
-/*****************************************************************/
-
-
-
-/*****************************************************************/
-/****************************CONTENT*******************************/
-/*****************************************************************/
-
-#section-content {
+/****************************Menu Style*********************************/
+#block-system-main-menu {
+    margin-bottom:0px;
+}
+#block-system-main-menu ul.menu {
+    margin:0;
+    padding:0;
+    list-style:none;
+    position:relative
+}
+#block-system-main-menu ul.menu li{
+	list-style: none;
+   background:none;
+   margin: 0px;
+	border:none;
+	-webkit-transition-property:background;
+	-moz-transition-property:background;
+	-o-transition-property:background;
+	transition-property:background;
+	-webkit-transition-duration:0.5s;
+	-moz-transition-duration:0.5s;
+	-o-transition-duration:0.5s;
+	transition-duration:0.5s
+}
+#block-system-main-menu ul.menu li:hover{
+   background:#f7931e
+}
+#block-system-main-menu ul.menu li a {
     display: block;
-    position: relative;
-    padding-top: 10px;
+    line-height: 1em;
+    padding: 0.5em;
+    outline:none;    color:#FFF;
+    color:white;
+	font-family:"rokkit";
+	font-size:25px;
+	font-weight:bold;
+	text-decoration:none
+}
+#block-system-main-menu ul.menu li a:hover {
+    text-decoration:none
+}
+#block-system-main-menu ul.menu li span.over {
+    background:#CCC;
+    color: #000000;
+    display: block;
+    float: right;
+    height: 33px;
+    line-height: 30px;
+    padding: 0 0.5em;
+    text-align: center;
+    cursor:pointer
+}
+#block-system-main-menu ul.menu li span.over:hover {
+    background:#F90;
+    color:#FFF
+}
+#block-system-main-menu ul.menu ul {
+    margin:0;
+    padding:0;
+    display:none;
+    background: #0fb1ea;
+}
+#block-system-main-menu ul.menu ul li a {
+    text-indent:0;
+    text-decoration:none;
+    font-size: 20px;
+}
+#block-system-main-menu ul.menu ul li a.last {
+    border-bottom: none;
+}
+/****************************Slider Style*********************************/
+.block-views-slider-block {
+  background: rgba(0, 149, 204, 0.75);
+  height: 335px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  border-radius: 20px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 15px 20px -8px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 15px 20px -8px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 15px 20px -8px;
+  overflow: hidden;
+  position: relative;
 }
 
-/********************************************************/
-/*---------------------ZONE BRANDING--------------------*/
-/********************************************************/
+.block-views-slider-block #views_slideshow_controls_text_next_slider-block,
+.block-views-slider-block #views_slideshow_controls_text_previous_slider-block {
+  display: none;
+}
 
+.block-views-slider-block:hover #views_slideshow_controls_text_next_slider-block,
+.block-views-slider-block:hover #views_slideshow_controls_text_previous_slider-block {
+  display: block;
+}
 
+.block-views-slider-block .view .view-content .item {
+  width: 630px;
+  margin: 30px auto;
+  height: 285px;
+  background: white;
+  border-radius: 10px;
+}
 
+.block-views-slider-block .view .view-content .item .info {
+    position: relative;
+    top: 0;
+  width: 50%;
+  display: inline-block;
+  background: white;
+  border-radius: 10px;
+}
 
-/********************************************************/
-/*---------------------ZONE BRANDING--------------------*/
-/********************************************************/
+.block-views-slider-block .view .view-content .item .title {
+  font-family: "rokkit";
+  color: #F27321;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px 22px;
+}
 
+.block-views-slider-block .view .view-content .item .title a {
+  font-family: "rokkit";
+  color: #F27321;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0px;
+}
 
-/*****************************************************************/
-/****************************CONTENT*******************************/
-/*****************************************************************/
+.block-views-slider-block .view .view-content .item .body {
+  font-family: "lucida";
+  color: #808080;
+  font-size: 10px;
+  margin: 0px 30px 0px 30px;
+}
+
+.block-views-slider-block .view .view-content .item .body a {
+  color: #808080;
+}
+
+.block-views-slider-block .view .view-content .item .body p {
+  font-size: 13px;
+}
+
+.block-views-slider-block .view .view-content .item .image {
+  width: 48%;
+  height: 450px;
+  position: absolute;
+  top: 0px;
+  line-height: 450px;
+  margin: 0px;
+  left: 338px;
+}
+
+.block-views-slider-block .view .view-content .item .image img {
+  width: 100%;
+  height: auto;
+  vertical-align: top;
+}
+
+.block-views-slider-block .view .view-content #widget_pager_bottom_slider-block {
+  position: absolute;
+  bottom: 16px;
+  margin: 0px 100px;
+  z-index: 100;
+  width: 250px
+}
+
+.block-views-slider-block .view .view-content #widget_pager_bottom_slider-block .views-slideshow-pager-field-item {
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
+  margin: 0px 5px;
+  width: 26px;
+  height: 26px;
+  background: url("../images/pager_slide.png") no-repeat;
+}
+
+.block-views-slider-block .view .view-content #widget_pager_bottom_slider-block .views-slideshow-pager-field-item.active {
+  background: url("../images/pager_slide_active.png") no-repeat;
+}
+
+.block-views-slider-block .view .view-content #views_slideshow_controls_text_slider-block #views_slideshow_controls_text_previous_slider-block {
+  background: url("../images/slider_prev.png") no-repeat;
+  width: 53px;
+  height: 61px;
+  position: absolute;
+  left: 8px;
+  top: 137px;
+  -webkit-transition-property: background;
+  -moz-transition-property: background;
+  -o-transition-property: background;
+  transition-property: background;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  text-indent: -119988px;
+  overflow: hidden;
+  text-align: left;
+  z-index: 100;
+}
+
+.block-views-slider-block .view .view-content #views_slideshow_controls_text_slider-block #views_slideshow_controls_text_previous_slider-block:hover {
+  background: url("../images/slider_prev_active.png") no-repeat;
+}
+
+.block-views-slider-block .view .view-content #views_slideshow_controls_text_slider-block #views_slideshow_controls_text_pause_slider-block {
+  display: none;
+}
+
+.block-views-slider-block .view .view-content #views_slideshow_controls_text_slider-block #views_slideshow_controls_text_next_slider-block {
+  background: url("../images/slider_next.png") no-repeat;
+  width: 53px;
+  height: 61px;
+  position: absolute;
+  right: 8px;
+  top: 137px;
+  -webkit-transition-property: background;
+  -moz-transition-property: background;
+  -o-transition-property: background;
+  transition-property: background;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  text-indent: -119988px;
+  overflow: hidden;
+  text-align: left;
+  z-index: 100;
+}
+
+.block-views-slider-block .view .view-content #views_slideshow_controls_text_slider-block #views_slideshow_controls_text_next_slider-block:hover {
+  background: url("../images/slider_next_active.png") no-repeat;
+}
+
+#views_slideshow_cycle_main_slider-block .image {
+  position: absolute;
+  right: 46px;
+}
+
+#views_slideshow_cycle_main_slider-block .views-field-field-fondo img {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+/*****************************styles block***************************************/
+
+#block-views-sponsors-block-3 h2.block-title,
+#block-block-2 h2.block-title {
+  position: absolute;
+  background: url(../images/block-liston.png) no-repeat;
+  width: 105%;
+  height: 77px;
+  background-size: 100%;
+  font-family: "rokkit";
+  color: #FFF;
+  font-weight: bold;
+  font-size: 1.7em;
+  text-align: center;
+  z-index: 1;
+}
+
+#block-views-sponsors-block-3 div.content .view-display-id-block_3 .view-content .item img{
+  width: 90%;
+  height: 100%;
+}
+/*****************************styles sponsors plate***************************************/
+#block-views-sponsors-block-2 .view-display-id-block_2 .views-row {
+  margin: 0px 35px 0px 35px;
+  float: left;
+}
+/**********************************footer links*****************************/
+#block-menu-menu-m-s-sobre-drupal, #block-menu-menu-c-mo-participar-, #block-menu-menu-qu-hacer-en-puebla-, #block-menu-menu-d-nde-qudarse-, #block-block-5 {
+  display: inline-block;
+  vertical-align: top;
+  width: 170px;
+  margin: 0px 31px 0px 31px;
+  text-align: left;
+}
+#block-menu-menu-d-nde-qudarse-, #block-block-5 {
+  margin: 20px 90px 0px 90px;
+}
